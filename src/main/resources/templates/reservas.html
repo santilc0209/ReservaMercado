@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reservas de Productos</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <h1>Reservas de Productos</h1>
+
+    <form th:action="@{/reservas}" method="post">
+        Producto: <input type="text" th:field="*{producto}" required/>
+        Cantidad: <input type="number" th:field="*{cantidad}" min="1" required/>
+        <button type="submit">Agregar Reserva</button>
+    </form>
+
+    <h2>Lista de Reservas</h2>
+    <ul>
+        <li th:each="reserva : ${reservas}">
+            <span th:text="${reserva.producto}">Producto</span> -
+            <span th:text="${reserva.cantidad}">Cantidad</span>
+            <a th:href="@{'/reservas/eliminar/' + ${reserva.id}}">Eliminar</a>
+        </li>
+    </ul>
+
+</body>
+</html>
